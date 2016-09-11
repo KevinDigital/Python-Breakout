@@ -1,0 +1,80 @@
+ASSIGNMENT 7 EXTENSIONS DESCRIPTIONS
+SHELLY ZHANG (SXZ2), KEVIN LI (KL553)
+DECEMBER 11, 2015
+
+EXTENSION #1: ADDING A COUNTDOWN SCREEN
+
+    During state countdown, a countdown screen (3...2...1) is displayed.
+    This was done with a method called countdown_timer in the breakout module
+    (lines 381-390).
+    
+    Note: because the instance attribute invariant for _mssg states that _mssg
+    is None if _state is STATE_COUNTDOWN, we created a second attribute called
+    _mssg2 that can be displayed in STATE_COUNDOWN. We therefore used this
+    attribute for the countdown and for displaying number of bricks remaining
+    during the game (see extension #3)
+    
+
+EXTENSION #2: ADDING SOUND EFFECTS DURING COLLISIONS
+
+    When the ball collides with either the wall or the paddle, a sound is
+    created. If it collides with the paddle, the sound bounce.wav is called,
+    if it collides with a brick, a random sound from all of the other options is
+    called.
+    
+    This was handled in the play module.
+        Paddle collisions: lines 112 and 113
+        Brick collisions: lines 120 and 123
+        
+        A list of all of the sounds (minus bounce) was created in constants to
+        randomly generate one from that list.
+        
+        
+EXTENSION #3: DISPLAYING NUMBER OF BRICKS REMAINING
+    
+    At the top of the screen above the bricks is a message (instance of GLabel)
+    that reads "Bricks Remaining: <number of bricks remaining>" The number goes
+    down every time a brick is hit.
+    
+    This was handled in the breakout module. A method was created called
+    num_bricks_remaining (lines 392-396) that prints the number of bricks
+    remaining( in mssg2). Then in update_state_active, line 292 changes the text
+    of mssg2.
+    This updates the text every frame, and therefore changes it when the bricks
+    get deleted. 
+    
+    When the game is over (either user won or lives are all used up), the mssg2
+    goes away.
+    
+    
+EXTENSION #4: INCREASING SPEED OF THE BALL
+
+    After the ball hits the paddle seven times, the ball speed increases.
+    
+    In the Models module, a method increasespeed was created (line 186) to
+    increase velocity by 50%. This method also reset the counter to zero again.
+    
+    In the Play module, inside updateBall there is a counter that gets updated
+    every time the ball hits the paddle (line 114). The counter is initialized
+    at zero in the initializer (line 98). When the counter reaches 7, the method
+    increasespeed from Models is called. If the ball dies, the counter also gets
+    reset. 
+
+EXTENSION #5: EMBELLISHING THE WIN SCREEN
+
+    When the player wins the game, a sound and an image appear in addition to
+    the message saying player has won.
+    
+    This was handled in the breakout module. We created and initialized an image
+    in the start method in breakout (line 140), but do not draw it until the
+    player has won/cleared all the bricks (line 346).
+    
+    Additionally, a sound is played at the first frame of winning. This was
+    created and called if the player won (breakout lines 347-9).
+    
+    NOTE:   The image was downloaded off of the CS home page website.
+            The sound was a sound found in the iMovie program built into our
+            computer. We found the file in the computer directory, converted it
+            from a .caf to .wav, and used it here. 
+    
+    
